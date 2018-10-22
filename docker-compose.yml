@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build:
+      dockerfile: docker/Dockerfile
+      context: react/
+    ports:
+     - "3000:3000"
+  backend:
+    build:
+      context: rest/
+      dockerfile: Dockerfile
+      args:
+        backendUrl: http://python:5000/retipy
+    ports:
+      - "8080:8080"
+  python:
+    build:
+      dockerfile: docker/Dockerfile
+      context: python/
+    ports:
+     - "5000:5000"
